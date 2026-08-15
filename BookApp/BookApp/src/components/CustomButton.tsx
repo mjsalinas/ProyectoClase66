@@ -18,12 +18,14 @@ export default function CustomButton({title, onPress, variant='primary'}: Custom
 const getStyles = (variant: "primary"| "secondary" | "tertiary") =>
     StyleSheet.create({
         button:{
-            backgroundColor: variant === "primary" ? 'navy' : 
-                                    variant === "secondary" ? 'lightblue' : '#fff',
+            backgroundColor: variant === "primary" ? '#206291' : 
+                                    variant === "secondary" ? '#c5def0' : '#fff',
             borderRadius: 5,
             width: 150,
+            padding: 12,
+            marginBottom: 5,
         },
         buttonTitle: {
-            color: 'white'
+            color: variant === "primary" ? 'white' : 'black'
         }
     })
