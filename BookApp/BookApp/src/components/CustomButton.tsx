@@ -10,7 +10,9 @@ type CustomButtonProps = {
 export default function CustomButton({title, onPress, variant='primary'}: CustomButtonProps){
   const styles = getStyles(variant);  
     return(
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity 
+        style={styles.button} 
+        onPress={onPress}>
             <Text style={styles.buttonTitle}> {title} </Text>
         </TouchableOpacity>
     );
