@@ -11,7 +11,7 @@ export default function Login({navigation} : any) {
   // setEmail("maria@unitec.edu")
 
   const handleLogin = () => {
-    navigation.navigate('HomeScreen')
+    navigation.navigate('HomeScreen', {email});
   }
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ export default function Login({navigation} : any) {
       <CustomInput
         onChangeText={setEmail}
         value={email}
-        placeholder={"Ingresa tu correo"}
+        placeholder={"Ingresa tu email"}
         type="email"
       />
       <CustomInput

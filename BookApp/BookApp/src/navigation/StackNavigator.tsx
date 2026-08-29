@@ -4,9 +4,9 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Home from "../screens/Home";
 //1. declarar el tipado de las pantallas con sus parametros
-type RootStackParamList ={
+export type RootStackParamList ={
     LoginScreen: undefined,
-    HomeScreen: undefined, 
+    HomeScreen: {email: string }, 
     RegisterScreen: undefined
 };
 
