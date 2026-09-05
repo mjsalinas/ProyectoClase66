@@ -1,11 +1,12 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text,StyleSheet  } from "react-native";
 import { RootStackParamList } from "../navigation/StackNavigator";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { TabsParamList } from "../navigation/TabsNavigator";
 import CustomButton from "../components/CustomButton";
+import { navigationRef } from "../navigation/NavigationService";
 
 type NestedProps = CompositeScreenProps<
   BottomTabScreenProps<TabsParamList, "HomeTab">,
@@ -20,9 +21,21 @@ export default function Home({ navigation, route }: NestedProps) {
     navigation.navigate("Settings");
   };
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    if (navigationRef.isReady()){
+        navigationRef.reset({
+            // es un arreglo para cual cada objeto representa una ruta en el nuevo historial del stack
+            routes: [
+                {name: 'LoginScreen'}
+            ], 
+            index: 0,
+        })
+    }
+  };
 
-  const handleNavigate = () => {};
+  const handleNavigate = () => {
+    navigation.navigate('LoginScreen');
+  };
 
   return (
     <View style={styles.container} >
