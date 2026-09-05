@@ -2,6 +2,7 @@ import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Profile from "../screens/features/Profile";
 import Settings from "../screens/features/Settings";
+import Home from "../screens/Home";
 
 //1. declarar el tipado de las pantallas con sus parametros
 export type TabsParamList ={
@@ -19,6 +20,7 @@ export default function TabNavigator (){
         <Tab.Navigator>
             <Tab.Screen name='Profile' component={Profile} />
             <Tab.Screen name='Settings' component={Settings}/>
+            <Tab.Screen name='HomeTab' component={Home} initialParams={{email:"usuario"}}/>
         </Tab.Navigator>
     )
 }

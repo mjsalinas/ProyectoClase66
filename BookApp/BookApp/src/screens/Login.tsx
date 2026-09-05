@@ -11,7 +11,8 @@ export default function Login({navigation} : any) {
   // setEmail("maria@unitec.edu")
 
   const handleLogin = () => {
-    navigation.navigate('HomeScreen', {email});
+    //navegacion a un tab dentro del componente tabs navigator registrado en el stack
+    navigation.navigate('UserTabs', {screen:'HomeTab', params:{email}});
   }
   return (
     <View style={styles.container}>
