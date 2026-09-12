@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { useAuth } from "../contexts/AuthContext";
 
-export default function Login({navigation} : any) {
+export default function Login({ navigation }: any) {
+  const { login } = useAuth();
   //definicion de variable en estado
   const [email, setEmail] = useState("");
-
-  //asignacion de nuevo valor a variable
-  // setEmail("maria@unitec.edu")
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    //navegacion a un tab dentro del componente tabs navigator registrado en el stack
-    navigation.navigate('UserTabs', {screen:'HomeTab', params:{email}});
-  }
+    const allowed = login(email);
+
+    if (allowed) {
+      //navegacion a un tab dentro del componente tabs navigator registrado en el stack
+      navigation.navigate("UserTabs", { screen: "HomeTab", params: { email } });
+    } else {
+      console.log("usuario sin acceso");
+    }
+  };
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
@@ -24,15 +30,12 @@ export default function Login({navigation} : any) {
         type="email"
       />
       <CustomInput
-        onChangeText={setEmail}
-        value={email}
+        onChangeText={setPassword}
+        value={password}
         placeholder={"Ingresa tu contraseña"}
         type="password"
       />
-      <CustomButton
-        title="Iniciar Sesion"
-        onPress={handleLogin}
-      />
+      <CustomButton title="Iniciar Sesion" onPress={handleLogin} />
     </View>
   );
 }

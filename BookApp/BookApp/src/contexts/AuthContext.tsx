@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createContext, useState } from "react";
 
 //1. tipado del objeto principal del contexto
@@ -11,7 +11,7 @@ type User = {
 
 type AuthContextType ={
     user: User | null;
-    login: ()=>{};
+    login: (email: string) => boolean;
     logout: ()=> {};
 }
 
@@ -22,8 +22,12 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({children}: {children: React.ReactNode}) =>{
     //declaracion de las 3 propiedad del contexto
     const [user, setUser] = useState<User>(null);
-    const login = ()=>{
-        return '';
+    const login = (email: string): boolean =>{
+        const isAllowed = email.endsWith('.edu');
+        if (isAllowed){
+            setUser({email});
+        }
+        return isAllowed;
     }
     const logout = () =>{
         return '';
@@ -36,4 +40,8 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) =>{
 }
 
 // 4. hook personalizado: exposicion del contexto a componentes de la aplicacion
-
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if(!context) throw new Error("useAuth debe ser utilizado dentro de AuthProvider");
+    return context;
+}
